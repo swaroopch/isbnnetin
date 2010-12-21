@@ -1,0 +1,20 @@
+<h2>ISBN <%= @isbn %></h2>
+
+<div class="stores">
+  <table>
+    <% @stores.each do |store, data| %>
+      <tr>
+        <td>
+          <a href="<%= data[:url] %>"><%= store %></a>
+        </td>
+        <td>
+          <% unless data[:price] == @not_available %>
+            Rs. <%= data[:price] %>
+          <% else %>
+            not available
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
