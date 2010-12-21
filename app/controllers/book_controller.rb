@@ -3,10 +3,12 @@ class BookController < ApplicationController
   end
 
   def view
-    Bookprice.instance.is_isbn(params[:isbn]) || raise(NotFound.new)
-
-    @stores = Bookprice.instance.prices(params[:isbn])
-    @not_available = Bookprice::NOT_AVAILABLE
+    if Bookprice.instance.is_isbn(params[:isbn])
+      @stores = Bookprice.instance.prices(params[:isbn])
+      @not_available = Bookprice::NOT_AVAILABLE
+    else
+      render :text => '404 Not Found', :status => 404
+    end
   end
 
 end
