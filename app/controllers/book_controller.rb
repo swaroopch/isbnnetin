@@ -3,8 +3,9 @@ class BookController < ApplicationController
   end
 
   def view
-    if Bookprice::is_isbn(params[:isbn])
-      @stores = Bookprice::prices(params[:isbn])
+    @isbn = params[:isbn]
+    if Bookprice::is_isbn(@isbn)
+      @stores = Bookprice::prices(@isbn)
       @not_available = Bookprice::NOT_AVAILABLE
     else
       render :text => '404 Not Found', :status => 404
