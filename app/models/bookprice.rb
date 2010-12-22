@@ -7,7 +7,6 @@ require 'mechanize'
 
 class Bookprice
 
-  TIME_FOR_EACH_SITE = 5 # seconds
   NOT_AVAILABLE = 999_999
 
   class << self
@@ -20,7 +19,7 @@ class Bookprice
 
     def fetch_page(url)
       begin
-        Timeout::timeout(TIME_FOR_EACH_SITE) do
+        Timeout::timeout(configatron.store_timeout) do
           return Mechanize.new.get(url)
         end
       rescue Exception => x

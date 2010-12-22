@@ -1,0 +1,9 @@
+
+common:
+  store_timeout: 5 # seconds
+
+development:
+
+test:
+
+production:

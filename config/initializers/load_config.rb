@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'configatron'
+
+yaml_config = YAML.load_file("#{Rails.root}/config/config.yml")
+
+configatron.configure_from_hash(yaml_config['common'])
+configatron.configure_from_hash(yaml_config[Rails.env])
