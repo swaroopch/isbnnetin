@@ -1,10 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '>= 3.0.3'
 gem 'jquery-rails', '>= 0.2.6'
-gem 'mechanize'
-gem 'configatron'
+gem 'mechanize', :require => 'mechanize'
+gem 'configatron', :require => 'configatron' # https://github.com/markbates/configatron/
 gem 'memcache-client'
+gem 'amazon-ecs', :require => 'amazon/ecs'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -30,5 +31,7 @@ gem 'memcache-client'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
+  gem 'gemedit'
   gem 'awesome_print'
+  gem 'ruby-debug'
 end

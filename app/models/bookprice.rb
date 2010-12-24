@@ -2,9 +2,6 @@
 
 require 'timeout'
 
-require 'rubygems'
-require 'mechanize'
-
 class Bookprice
 
   NOT_AVAILABLE = 999_999
