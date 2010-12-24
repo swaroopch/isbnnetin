@@ -47,5 +47,8 @@ module Isbnnetin
     # Logging
     config.logger = Logger.new(STDOUT)
     config.log_level = Logger::WARN
+
+    # Caching
+    config.cache_store = :mem_cache_store, { :namespace => 'isbnnetin' }
   end
 end
