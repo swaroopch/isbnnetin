@@ -42,6 +42,7 @@ class Bookprice
     end
 
     def prices(isbn)
+      raise "Invalid ISBN : #{isbn}" unless is_isbn(isbn)
       self.searches.map { |name, search| [name, search.call(isbn)] }.sort_by { |p| p[1][:price] }
     end
 
