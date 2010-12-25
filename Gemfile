@@ -34,4 +34,6 @@ group :development, :test do
   gem 'gemedit'
   gem 'awesome_print'
   gem 'ruby-debug'
+  gem 'wirble'
+  gem 'hirb'
 end
