@@ -48,3 +48,8 @@
 <div class="goodreads">
   <script type="text/javascript" charset="utf-8" src="http://www.goodreads.com/api/reviews_widget?did=DEVELOPER_ID&isbn=<%= @isbn %>&min_length=100&num_reviews=10"></script>
 </div>
+
+<h2>What to read next?</h2>
+<% unless @bookseer.nil? %>
+  <a href="<%= @bookseer %>">Consult the Bookseer</a>
+<% end %>
