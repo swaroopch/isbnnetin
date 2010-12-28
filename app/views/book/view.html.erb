@@ -1,3 +1,10 @@
+
+<% content_for :title do %>Search for the best prices in India for the book <%= @bookinfo[:title] %> by <%= @bookinfo[:authors_as_string] %><% end %>
+
+<%= content_for :js do %>
+  var isbn = "<%= @isbn %>";
+<% end %>
+
 <h2>ISBN <%= @isbn %></h2>
 
 <% unless @bookinfo.nil? %>
@@ -8,13 +15,17 @@
   </div>
   <% unless @bookinfo[:rating].nil? %>
     <div>
-      <%= @bookinfo[:rating] %> out of 5
+      Average Customer Rating at <a href="<%= @bookinfo[:detail_page] %>"><%= @bookinfo[:info_source].capitalize %></a> : <%= @bookinfo[:rating] %> out of 5
     </div>
+  <% end %>
+  <% unless @bookinfo[:image].nil? %>
+    <a href="<%= @bookinfo[:detail_page] %>"><img src="<%= @bookinfo[:image] %>" alt="<%= @bookinfo[:title] %>" /></a>
   <% end %>
 <% end %>
 
-<h2>Prices</h2>
+<h2>Where to Buy</h2>
 <div class="stores">
+  <p>(Sorted by price)</p>
   <table>
     <% @stores.each do |store, data| %>
       <tr>

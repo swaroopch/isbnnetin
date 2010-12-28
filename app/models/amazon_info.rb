@@ -57,7 +57,7 @@ class AmazonInfo
         :authors => authors,
         :authors_as_string => authors.join(', '),
         :publisher => publisher,
-        :amazon_url => detailpageurl,
+        :detail_page => detailpageurl,
         :image => image,
         :review_source => source,
         :review_content => content,
