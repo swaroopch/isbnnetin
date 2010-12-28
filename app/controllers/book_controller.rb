@@ -1,4 +1,7 @@
 class BookController < ApplicationController
+  respond_to :html
+  respond_to :json, :only => :view
+
   def index
   end
 
@@ -20,6 +23,12 @@ class BookController < ApplicationController
 
     @stores = Rails.cache.fetch("prices:#{@isbn}", :expires_in => 1.day) { Bookprice::prices(@isbn) }
     @not_available = Bookprice::NOT_AVAILABLE
+
+    respond_with(@stores) do |format|
+      format.json do
+        render :json => @stores
+      end
+    end
   end
 
 
