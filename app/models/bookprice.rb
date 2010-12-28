@@ -178,6 +178,49 @@ class Bookprice
       end
     end
 
+    def search_coinjoos(isbn)
+      url = "http://www.coinjoos.com/product/books/#{isbn}/1/"
+      page = self.fetch_page(url)
+      unless page.nil?
+        text = page.search(".flipRate").text
+        { :price => find_price_at_end(text), :url => url }
+      else
+        { :price => NOT_AVAILABLE, :url => url }
+      end
+    end
+
+    def search_friendsofbooks(isbn)
+      url = "http://www.friendsofbooks.com/store/index.php?main_page=advanced_search_result&search_in_description=1&keyword=#{isbn}"
+      page = self.fetch_page(url)
+      unless page.nil?
+        text = page.search(".listingDescription .productSpecialPrice").text
+        { :price => find_price_at_end(text), :url => url }
+      else
+        { :price => NOT_AVAILABLE, :url => url }
+      end
+    end
+
+    def search_landmark(isbn)
+      url = "http://www.landmarkonthenet.com/product/SearchPaging.aspx?code=#{isbn}&type=0&num=0"
+      page = self.fetch_page(url)
+      unless page.nil?
+        text = page.search("#ctl00_ContentPlaceHolder1_rptBook_ctl00_lblsplprice").text
+        { :price => find_price_at_end(text), :url => url }
+      else
+        { :price => NOT_AVAILABLE, :url => url }
+      end
+    end
+
+    def search_crossword(isbn)
+      url = "http://www.crossword.in/books/search?q=#{isbn}"
+      page = self.fetch_page(url)
+      unless page.nil?
+        text = page.search(".variant-final-price").text
+        { :price => find_price_at_end(text), :url => url }
+      else
+        { :price => NOT_AVAILABLE, :url => url }
+      end
+    end
   end
 
 end
