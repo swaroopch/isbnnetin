@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
-raise "aws_access_key not specified" if configatron.aws_access_key.nil?
-raise "aws_secret_key not specified" if configatron.aws_secret_key.nil?
+raise "AWS_ACCESS_KEY not specified" if ENV['AWS_ACCESS_KEY'].nil?
+raise "AWS_SECRET_KEY not specified" if ENV['AWS_SECRET_KEY'].nil?
 
 Amazon::Ecs.options = {
-  :aWS_access_key_id => configatron.aws_access_key,
-  :aWS_secret_key => configatron.aws_secret_key,
+  :aWS_access_key_id => ENV['AWS_ACCESS_KEY'],
+  :aWS_secret_key => ENV['AWS_SECRET_KEY'],
 }
 
 class AmazonInfo
