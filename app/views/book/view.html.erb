@@ -21,6 +21,12 @@
   <% unless @bookinfo[:image].nil? %>
     <a href="<%= @bookinfo[:detail_page] %>"><img src="<%= @bookinfo[:image] %>" alt="<%= @bookinfo[:title] %>" /></a>
   <% end %>
+  <% unless @bookinfo[:review_source].nil? %>
+    <div id="editorial_review">
+      <h3><%= @bookinfo[:review_source] %></h3>
+      <%= @bookinfo[:review_content].html_safe %>
+    </div>
+  <% end %>
 <% end %>
 
 <h2>Where to Buy</h2>
