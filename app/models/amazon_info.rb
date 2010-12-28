@@ -24,7 +24,7 @@ class AmazonInfo
 
       result = Amazon::Ecs.item_lookup(isbn, { :response_group => 'Medium' })
       if result.has_error?
-        raise ArgumentError, "No Amazon info available"
+        return nil
       end
 
       result.items.each do |item|

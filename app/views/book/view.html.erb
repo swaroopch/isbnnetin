@@ -1,5 +1,19 @@
 <h2>ISBN <%= @isbn %></h2>
 
+<% unless @bookinfo.nil? %>
+  <div>
+    Book: <%= @bookinfo[:title] %> <br />
+    By: <%= @bookinfo[:authors_as_string] %> <br />
+    Publisher: <%= @bookinfo[:publisher] %>
+  </div>
+  <% unless @bookinfo[:rating].nil? %>
+    <div>
+      <%= @bookinfo[:rating] %> out of 5
+    </div>
+  <% end %>
+<% end %>
+
+<h2>Prices</h2>
 <div class="stores">
   <table>
     <% @stores.each do |store, data| %>

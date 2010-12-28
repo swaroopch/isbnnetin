@@ -9,8 +9,8 @@ class FlipkartInfo
 
       product_details = page.search("div.item_details span.product_details_values")
       title     = product_details[0].text.strip
-      publisher = product_details[1].text.strip
-      authors   = product_details[6].text.strip
+      authors   = product_details[1].text.strip
+      publisher = product_details[6].text.strip
 
       {
         :info_source => "flipkart",
