@@ -2,8 +2,13 @@ source 'http://rubygems.org'
 
 gem 'rails', '>= 3.0.3'
 gem 'jquery-rails', '>= 0.2.6'
-gem 'mechanize', :require => 'mechanize'
+
+# http://mongoid.org/docs/installation/
+gem 'mongoid', '>= 2.0.0.beta'
+gem 'bson_ext', '>= 1.1.5'
+
 gem 'configatron', :require => 'configatron' # https://github.com/markbates/configatron/
+gem 'mechanize', :require => 'mechanize'
 gem 'memcache-client'
 gem 'amazon-ecs', :require => 'amazon/ecs'
 
