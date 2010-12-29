@@ -6,6 +6,27 @@ class Bookprice
 
   NOT_AVAILABLE = 999_999
 
+  attr_accessor :isbn
+
+  def initialize(given_isbn)
+    self.isbn = self.class.check_isbn(given_isbn)
+  end
+
+  # For usage with DelayedJob : Bookprice.new(:isbn => "9789380032825").perform
+  def perform
+    prices = self.class.prices(self.isbn)
+    Rails.cache.write(self.cache_key, prices)
+    prices
+  end
+
+  def cache_key
+    "prices:#{self.isbn}"
+  end
+
+  def number_of_stores
+    self.class.searches.size
+  end
+
   class << self
 
     def find_price_at_end(text)
@@ -33,7 +54,7 @@ class Bookprice
     def searches
       # e.g. ["search_a1books", "search_infibeam", "search_rediff"]
       functions = self.methods.select { |name| name =~ /^search_(\w+)$/ }.sort
-      # e.g. [["a1books", search_a1books], ["infibeam", search_infibeam], ["rediff", search_rediff]]
+      # e.g. [[:a1books, search_a1books], [:infibeam, search_infibeam], [:rediff, search_rediff]]
       functions.collect { |fname| [ fname.split("_")[1].to_sym, self.method(fname) ] }
     end
 
@@ -41,8 +62,14 @@ class Bookprice
       self.searches.map { |name, search| name.to_s }.sort.map(&:to_sym)
     end
 
+    def check_isbn(isbn)
+      isbn = isbn[:isbn] if isbn.is_a?(Hash)
+      raise ArgumentError, "Invalid ISBN: #{isbn}" unless !isbn.nil? && isbn.is_a?(String) && is_isbn(isbn)
+      isbn
+    end
+
     def prices(isbn)
-      raise "Invalid ISBN : #{isbn}" unless is_isbn(isbn)
+      isbn = check_isbn(isbn)
       self.searches.map { |name, search| [name, search.call(isbn)] }.sort_by { |p| p[1][:price] }
     end
 

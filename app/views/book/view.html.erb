@@ -29,26 +29,37 @@
   <% end %>
 <% end %>
 
-<h2>Where to Buy</h2>
-<div class="stores">
-  <p>(Sorted by price)</p>
-  <table>
-    <% @stores.each do |store, data| %>
-      <tr>
-        <td>
-          <a href="<%= data[:url] %>"><%= store %></a>
-        </td>
-        <td>
-          <% unless data[:price] == @not_available %>
-            <span style="font-family:rupee">R</span> <%= data[:price] %>
-          <% else %>
-            not available
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
-</div>
+<% unless @stores.nil? %>
+  <h2>Where to Buy</h2>
+  <div class="stores">
+    <p>(Sorted by price)</p>
+    <table>
+      <% @stores.each do |store, data| %>
+        <tr>
+          <td>
+            <a rel="nofollow" href="<%= data[:url] %>"><%= store %></a>
+          </td>
+          <td>
+            <% unless data[:price] == @not_available %>
+              <span style="font-family:rupee">R</span> <%= data[:price] %>
+            <% else %>
+              not available
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% else %>
+  <p>
+  <em>Fetching prices from <%= @prices.number_of_stores %> online stores... please be patient!</em> (This page will be automatically refreshed, please do NOT manually refresh)
+  </p>
+  <% content_for :js do %>
+    $( function() {
+      setTimeout("location.reload(true)", 60 * 1000);
+    });
+  <% end %>
+<% end %>
 
 <h2>Reviews</h2>
 <div class="goodreads">
@@ -57,5 +68,5 @@
 
 <h2>What to read next?</h2>
 <% unless @bookseer.nil? %>
-  <a href="<%= @bookseer %>">Consult the Bookseer</a>
+  <a rel="nofollow" href="<%= @bookseer %>">Consult the Bookseer</a>
 <% end %>

@@ -21,7 +21,11 @@ class BookController < ApplicationController
       @bookseer = BookseerInfo::link(@bookinfo)
     end
 
-    @stores = Rails.cache.fetch("prices:#{@isbn}", :expires_in => 1.day) { Bookprice::prices(@isbn) }
+    @prices = Bookprice.new(:isbn => @isbn)
+    @stores = Rails.cache.read(@prices.cache_key)
+    if @stores.nil?
+      Delayed::Job.enqueue(@prices)
+    end
     @not_available = Bookprice::NOT_AVAILABLE
 
     respond_with(@stores) do |format|
