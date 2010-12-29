@@ -7,10 +7,16 @@ gem 'jquery-rails', '>= 0.2.6'
 gem 'mongoid', '>= 2.0.0.beta'
 gem 'bson_ext', '>= 1.1.5'
 
-gem 'configatron', :require => 'configatron' # https://github.com/markbates/configatron/
-gem 'mechanize', :require => 'mechanize'
+gem 'delayed_job'
+gem 'delayed_job_mongoid'
+
 gem 'memcache-client'
+
+gem 'configatron', :require => 'configatron' # https://github.com/markbates/configatron/
+
+gem 'mechanize', :require => 'mechanize'
 gem 'amazon-ecs', :require => 'amazon/ecs'
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -36,9 +42,9 @@ gem 'amazon-ecs', :require => 'amazon/ecs'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem 'gemedit'
-  gem 'awesome_print'
-  gem 'ruby-debug'
   gem 'wirble'
   gem 'hirb'
+  gem 'awesome_print'
+  gem 'gemedit'
+  gem 'ruby-debug'
 end
