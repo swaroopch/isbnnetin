@@ -1,0 +1,171 @@
+
+<% content_for :header do %>
+  <h2>isbn.net.in</h2>
+<% end %>
+
+<dl>
+  <dt>
+    What is isbn.net.in?
+  </dt>
+  <dd>
+  <p>
+    A quick way to find the online prices for a book in India. <br />
+    See <a href="http://www.swaroopch.com/blog/india-book-price-comparison/">full introduction</a> for more details.
+  </p>
+  </dd>
+
+  <dt>
+    How to use
+  </dt>
+  <dd>
+  Suffix this website address with a <a href="http://en.wikipedia.org/wiki/ISBN">ISBN</a> or <a href="http://en.wikipedia.org/wiki/European_Article_Number">EAN</a>. That's it. <br />
+  Example: <a href="http://isbn.net.in/0142000280">http://isbn.net.in/0142000280</a>
+  </dd>
+
+  <dt>
+  <strong>New!</strong>
+  </dt>
+  <dd>
+  Read about the <a href="http://www.swaroopch.com/blog/tag/isbnnetin/">latest updates on my blog</a>.
+  </dd>
+
+  <dt>
+    Why isbn.net.in?
+  </dt>
+  <dd>
+  <ol>
+    <li>
+      The most reliable data possible (with <%= link_to "Disclaimers", about_path %>)
+    </li>
+    <li>
+      Get the latest prices instantly, from a comprehensive list of online book stores, along with the book cover, description and Amazon rating.
+    </li>
+  </ol>
+  </dd>
+
+  <dt>
+    But I want to search for the book, I don't have the isbn number.
+  </dt>
+  <dd>
+  Use <a rel="nofollow" href="http://www.mysmartprice.com">MySmartPrice</a> or <a rel="nofollow" href="http://www.mydiscountbay.com">MyDiscountBay</a> or <a rel="nofollow" href="http://www.indiabookstore.net">IndiaBookStore</a>. <br />
+    I still prefer isbn.net.in personally because it (1) gets the very latest prices (2) looks at more number of online book stores.
+  </dd>
+</dl>
+
+<hr />
+
+<dl>
+  <dt>
+    Is there a way to make it more automatic to use?
+  </dt>
+  <dd>
+  <p>
+    Yes, there is a bookmarklet. Follow the instructions:
+    <ol>
+      <li>
+      Drag the following link to your browser's bookmarks toolbar: <br />
+      <a href="javascript:void(function(){if(typeof%20jQuery%20==%20'undefined'){var%20s=document.createElement('script');s.src='http://isbn.net.in/js/jquery.min.js';document.getElementsByTagName('head')[0].appendChild(s);}var%20l=document.createElement('script');l.src='http://isbn.net.in/js/bookmarklet_runner.js?x='+(Math.random());document.getElementsByTagName('head')[0].appendChild(l);function%20runIfReady(){try{if(jQuery.runisbn){%20jQuery.runisbn();%20clearInterval(interval);}}catch(e){if(typeof%20console%20!=='undefined'){console.log(e)}}};%20var%20interval%20=%20window.setInterval(runIfReady,100);}())">Book Prices in India</a>
+      </li>
+      <li>
+      Go to any random book page, for example, <a href="http://oreilly.com/catalog/9781934356500/">this O'Reilly book</a>; Note that it also works with <a href="http://www.infibeam.com/Books/info/gurcharan-das/difficulty-being-good/9780670083497.html">Indian ecommerce sites</a>.
+      </li>
+      <li>
+        Click on the bookmarklet (in your browser's bookmarks toolbar).
+      </li>
+      <li>
+        You will now be taken to the corresponding page on isbn.net.in containing a sorted list of prices from different Indian online book stores.
+      </li>
+    </ol>
+  </p>
+  </dd>
+</dl>
+
+<hr />
+
+<dl>
+  <dt>
+    Which websites do you search for prices?
+  </dt>
+  <dd>
+    <% unless @names.nil? %>
+      We look up <strong><%= @names.size %> Indian ecommerce stores</strong> for the best price for the book you want to buy:
+      <ul>
+      <% @names.each do |name| %>
+        <li>
+          <%= name.to_s.capitalize %>
+        </li>
+      <% end %>
+      </ul>
+    <% end %>
+  </dd>
+</dl>
+
+<hr />
+
+<h3>Feedback from Users</h3>
+
+<blockquote>
+  Thanks very much for the books search site http://isbn.net.in , I just saved Rs 1000 by searching for the best price !!
+  <br />
+  -- <a href="http://twitter.com/vpsingh/status/13225509113">Praveen Singh</a>
+</blockquote>
+
+<blockquote>
+  great spiffy product :)
+  <br />
+  -- <a href="http://twitter.com/allwinagnel/statuses/13076826472">Allwin, founder of PagalGuy.com</a>
+</blockquote>
+
+<blockquote>
+  isbn.net.in saves a ton of time when trying to buy books online. Indian e commerce needs more of them. Thank you @swaroopch.
+  <br />
+  -- <a href="http://twitter.com/shashanknd/status/24654201316">Shashank ND</a>
+</blockquote>
+
+<blockquote>
+  isbn.net.in is awesome #recommended #ftw #awesomeness
+  <br />
+  -- <a href="http://twitter.com/saurabh/statuses/10530236565">Saurabh Garg</a>
+</blockquote>
+
+<blockquote>
+  isbn.net.in is actually quite bloody awesome!
+  <br />
+  -- <a href="http://twitter.com/kranium256/statuses/10316468429">Kartikay Sahay</a>
+</blockquote>
+
+<blockquote>
+  Excellent! I'll use it every time I need to buy a book
+  <br />
+  -- <a href="http://www.swaroopch.com/blog/india-book-price-comparison/#comment-131736">Sharath M S</a>
+</blockquote>
+
+<blockquote>
+  Super App. Try http://isbn.net.in to compare book prices on different online books portals.
+  <br />
+  -- <a href="http://twitter.com/s4sukhdeep/statuses/14210750762">SukhDeep Singh</a>
+</blockquote>
+
+<blockquote>
+  Got to love isbn.net.in, Finds best prices on books over multiple online stores.
+  <br />
+  -- <a href="http://twitter.com/vishalmanohar/status/28970031668">Vishal Manohar</a>
+</blockquote>
+
+<blockquote>
+  My sis and her friends are planning to search for their next sem books through your isbn.net.in site and then buy from the best source.
+  <br />
+  -- Azmi Ahmad
+</blockquote>
+
+<blockquote>
+  Awesome program. Before buying a book online I first check the price on isbn.net.in. You keep adding new sites which is also good.
+  <br />
+  -- Kishore
+</blockquote>
+
+<blockquote>
+  Thanks for writing a very useful tool (isbn.net.in), and making it so simple and user friendly. Kudos!
+  <br />
+  -- Praveen
+</blockquote>

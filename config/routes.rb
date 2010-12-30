@@ -1,5 +1,5 @@
 Isbnnetin::Application.routes.draw do
-  get "book/index"
+  get "content/index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -8,6 +8,7 @@ Isbnnetin::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
+  match 'about' => 'content#about'
   match ':isbn' => 'book#view'
 
   # Sample of named route:
@@ -52,7 +53,7 @@ Isbnnetin::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "book#index"
+  root :to => "content#index"
 
   # See how all your routes lay out with "rake routes"
 

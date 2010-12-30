@@ -10,7 +10,21 @@ table.book_attributes td {
   font-size: large;
 }
 
-#container h1, #container h2, #container h3, #container h4, #container h5, #container h6 {
-  margin-top: 20px;
-  margin-bottom: 10px;
+#container blockquote {
+  color: #666;
+  margin: 20px;
+  font-style: italic;
 }
+
+/* Stolen from Blueprint */
+/* https://github.com/joshuaclayton/blueprint-css/raw/master/blueprint/screen.css */
+#container h1, #container h2, #container h3, #container h4, #container h5, #container h6 {font-weight:normal;color:#111;}
+#container h1 {font-size:3em;line-height:1;margin-bottom:0.5em;margin-top:0.5em;}
+#container h2 {font-size:2em;margin-bottom:0.75em;margin-top:0.5em;}
+#container h3 {font-size:1.5em;line-height:1;margin-bottom:1em;margin-top:0.5em;}
+#container h4 {font-size:1.2em;line-height:1.25;margin-bottom:1.25em;margin-top:0.5em;}
+#container h5 {font-size:1em;font-weight:bold;margin-bottom:1.5em;margin-top:0.5em;}
+#container h6 {font-size:1em;font-weight:bold;margin-top:0.5em;}
+#container dl {margin:0 0 1.5em 0;margin-top:0.5em;}
+#container dl dt {font-weight:bold;}
+#container dd {margin-left:1.5em;}

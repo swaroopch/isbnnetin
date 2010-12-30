@@ -2,9 +2,6 @@ class BookController < ApplicationController
   respond_to :html
   respond_to :json, :only => :view
 
-  def index
-  end
-
   def view
     @isbn = canonicalize_isbn(params[:isbn])
     if @isbn.nil? || !is_isbn(@isbn)
