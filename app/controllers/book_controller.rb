@@ -12,6 +12,7 @@ class BookController < ApplicationController
       return
     end
 
+    @prices = Bookprice.new(:isbn => @isbn)
     @bookinfo = Rails.cache.fetch("amazon_info:#{@isbn}", :expires_in => 1.day) { AmazonInfo::book_info(@isbn) }
     if @bookinfo.nil?
       @bookinfo = Rails.cache.fetch("flipkart_info:#{@isbn}", :expires_in => 1.day) { FlipkartInfo::book_info(@isbn) }
@@ -19,13 +20,14 @@ class BookController < ApplicationController
 
     unless @bookinfo.nil?
       @bookseer = BookseerInfo::link(@bookinfo)
+
+      @stores = Rails.cache.read(@prices.cache_key)
+      if @stores.nil?
+        @prices.delay.perform
+        #Delayed::Job.enqueue(@prices)
+      end
     end
 
-    @prices = Bookprice.new(:isbn => @isbn)
-    @stores = Rails.cache.read(@prices.cache_key)
-    if @stores.nil?
-      Delayed::Job.enqueue(@prices)
-    end
     @not_available = Bookprice::NOT_AVAILABLE
 
     respond_with(@stores) do |format|
