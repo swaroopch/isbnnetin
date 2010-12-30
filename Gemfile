@@ -10,7 +10,7 @@ gem 'bson_ext', '>= 1.1.5'
 gem 'delayed_job'
 gem 'delayed_job_mongoid'
 
-gem 'memcache-client'
+gem 'dalli'
 
 gem 'configatron', :require => 'configatron' # https://github.com/markbates/configatron/
 

@@ -21,7 +21,7 @@ class BookController < ApplicationController
     unless @bookinfo.nil?
       @bookseer = BookseerInfo::link(@bookinfo)
 
-      @stores = Rails.cache.read(@prices.cache_key)
+      @stores = Rails.cache.fetch(@prices.cache_key)
       if @stores.nil?
         # Check if book is already queued.
         if Delayed::Backend::Mongoid::Job.where(:handler => /#{@isbn}/).empty?

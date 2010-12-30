@@ -49,6 +49,6 @@ module Isbnnetin
     config.log_level = Logger::WARN
 
     # Caching
-    config.cache_store = :mem_cache_store, { :namespace => 'isbnnetin' }
+    config.cache_store = :dalli_store, { :namespace => 'isbnnetin' }
   end
 end

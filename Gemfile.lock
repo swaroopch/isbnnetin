@@ -40,6 +40,7 @@ GEM
     configatron (2.6.4)
       yamler (>= 0.1.0)
     daemons (1.1.0)
+    dalli (1.0.0)
     delayed_job (2.1.2)
       activesupport (~> 3.0)
       daemons
@@ -63,7 +64,6 @@ GEM
       treetop (~> 1.4.8)
     mechanize (1.0.0)
       nokogiri (>= 1.2.1)
-    memcache-client (1.8.5)
     mime-types (1.16)
     mongo (1.1.5)
       bson (>= 1.1.5)
@@ -115,13 +115,13 @@ DEPENDENCIES
   awesome_print
   bson_ext (>= 1.1.5)
   configatron
+  dalli
   delayed_job
   delayed_job_mongoid
   gemedit
   hirb
   jquery-rails (>= 0.2.6)
   mechanize
-  memcache-client
   mongoid (>= 2.0.0.beta)
   rails (>= 3.0.3)
   ruby-debug
