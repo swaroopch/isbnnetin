@@ -1,11 +1,8 @@
 #!/usr/bin/env ruby
 
-yaml_config = YAML.load_file("#{Rails.root}/config/app_config.yml")
+config_file = Rails.root.join("config", "app_config.yml")
+yaml_config = YAML.load_file(config_file)
 
+# https://github.com/markbates/configatron/
 configatron.configure_from_hash(yaml_config['common'])
 configatron.configure_from_hash(yaml_config[Rails.env])
-
-#server_config_file = "#{Rails.root}/config/server_config.yml"
-#if File.exists?(server_config_file)
-  #configatron.configure_from_hash(YAML.load_file(server_config_file))
-#end
