@@ -60,6 +60,10 @@
           </tr>
         <% end %>
       </table>
+      <br />
+      <p>
+      <strong>Note</strong>: "not available" can mean two things - (1) the book is not available on that website, OR (2) the website took too long to tell us the price, so we moved on to getting the price from the next website - after all, we <em>are</em> searching <%= @stores.size %> websites!
+      </p>
     </div>
   <% else %>
     <p>
