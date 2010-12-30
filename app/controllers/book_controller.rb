@@ -23,8 +23,13 @@ class BookController < ApplicationController
 
       @stores = Rails.cache.read(@prices.cache_key)
       if @stores.nil?
-        @prices.delay.perform
-        #Delayed::Job.enqueue(@prices)
+        # Check if book is already queued.
+        if Delayed::Backend::Mongoid::Job.where(:handler => /#{@isbn}/).empty?
+          logger.info("Book #{@isbn} has been queued")
+          @prices.delay.perform
+        else
+          logger.info("Book #{@isbn} is already queued")
+        end
       end
     end
 
