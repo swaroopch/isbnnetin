@@ -1,6 +1,4 @@
 
-<% content_for :title do %>Search for the best prices in India for the book <%= @bookinfo[:title] %> by <%= @bookinfo[:authors_as_string] %><% end %>
-
 <%= content_for :js do %>
   var isbn = "<%= @isbn %>";
 <% end %>
@@ -8,6 +6,8 @@
 <h2>ISBN <%= @isbn %></h2>
 
 <% unless @bookinfo.nil? %>
+  <% content_for :title do %>Search for the best prices in India for the book <%= @bookinfo[:title] %> by <%= @bookinfo[:authors_as_string] %><% end %>
+
   <div>
     Book: <%= @bookinfo[:title] %> <br />
     By: <%= @bookinfo[:authors_as_string] %> <br />
@@ -27,46 +27,51 @@
       <%= @bookinfo[:review_content].html_safe %>
     </div>
   <% end %>
-<% end %>
 
-<% unless @stores.nil? %>
-  <h2>Where to Buy</h2>
-  <div class="stores">
-    <p>(Sorted by price)</p>
-    <table>
-      <% @stores.each do |store, data| %>
-        <tr>
-          <td>
-            <a rel="nofollow" href="<%= data[:url] %>"><%= store %></a>
-          </td>
-          <td>
-            <% unless data[:price] == @not_available %>
-              <span style="font-family:rupee">R</span> <%= data[:price] %>
-            <% else %>
-              not available
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-<% else %>
-  <p>
-  <em>Fetching prices from <%= @prices.number_of_stores %> online stores... please be patient!</em> (This page will be automatically refreshed, please do NOT manually refresh)
-  </p>
-  <% content_for :js do %>
-    $( function() {
+  <% unless @stores.nil? %>
+    <h2>Where to Buy</h2>
+    <div class="stores">
+      <p>(Sorted by price)</p>
+      <table>
+        <% @stores.each do |store, data| %>
+          <tr>
+            <td>
+              <a rel="nofollow" href="<%= data[:url] %>"><%= store %></a>
+            </td>
+            <td>
+              <% unless data[:price] == @not_available %>
+                <span style="font-family:rupee">R</span> <%= data[:price] %>
+              <% else %>
+                not available
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% else %>
+    <p>
+    <em>Fetching prices from <%= @prices.number_of_stores %> online stores... please be patient!</em> (This page will be automatically refreshed, please do NOT manually refresh)
+    </p>
+    <% content_for :js do %>
+      $( function() {
       setTimeout("location.reload(true)", 60 * 1000);
-    });
+      });
+    <% end %>
   <% end %>
-<% end %>
 
-<h2>Reviews</h2>
-<div class="goodreads">
-  <script type="text/javascript" charset="utf-8" src="http://www.goodreads.com/api/reviews_widget?did=DEVELOPER_ID&isbn=<%= @isbn %>&min_length=100&num_reviews=10"></script>
-</div>
+  <h2>Reviews</h2>
+  <div class="goodreads">
+    <script type="text/javascript" charset="utf-8" src="http://www.goodreads.com/api/reviews_widget?did=DEVELOPER_ID&isbn=<%= @isbn %>&min_length=100&num_reviews=10"></script>
+  </div>
 
-<h2>What to read next?</h2>
-<% unless @bookseer.nil? %>
-  <a rel="nofollow" href="<%= @bookseer %>">Consult the Bookseer</a>
+  <% unless @bookseer.nil? %>
+    <h2>What to read next?</h2>
+    <a rel="nofollow" href="<%= @bookseer %>">Consult the Bookseer</a>
+  <% end %>
+
+<% else %><%# @bookinfo is nil %>
+  <p>
+  <em>Cannot find any details about this book. Are you sure there is such a book?</em>
+  </p>
 <% end %>

@@ -8,9 +8,13 @@ class FlipkartInfo
       page = Mechanize.new.get(url)
 
       product_details = page.search("div.item_details span.product_details_values")
-      title     = product_details[0].text.strip
-      authors   = product_details[1].text.strip
-      publisher = product_details[6].text.strip
+      unless product_details.blank?
+        title     = product_details[0].text.strip
+        authors   = product_details[1].text.strip
+        publisher = product_details[6].text.strip
+      else
+        return nil
+      end
 
       image = nil
       image_tag = page.search("div#mprodimg-id img")
