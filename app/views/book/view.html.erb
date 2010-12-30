@@ -40,8 +40,8 @@
     </div>
   <% end %>
 
+  <h2>Where to Buy</h2>
   <% unless @stores.nil? %>
-    <h2>Where to Buy</h2>
     <div class="stores">
       <p>(Sorted by price)</p>
       <table>
@@ -63,7 +63,7 @@
     </div>
   <% else %>
     <p>
-    <em>Fetching prices from <%= @prices.number_of_stores %> online stores... please be patient!</em> (This page will be automatically refreshed, please do NOT manually refresh)
+    <strong>Fetching prices from <%= @prices.number_of_stores %> online stores... please be patient!</strong> (This page will be automatically refreshed, please do NOT manually refresh)
     </p>
     <% content_for :js do %>
       $( function() {
