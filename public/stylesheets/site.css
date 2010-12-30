@@ -1,3 +1,16 @@
 a img {
   border: 0;
 }
+
+table.book_attributes td {
+  padding: 5px;
+}
+
+.big {
+  font-size: large;
+}
+
+#container h1, #container h2, #container h3, #container h4, #container h5, #container h6 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
