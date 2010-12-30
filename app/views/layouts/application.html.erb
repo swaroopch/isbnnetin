@@ -51,16 +51,16 @@
 
 <body>
 
-  <div id="container">
-    <header>
+  <div id="container" class="container_12">
+    <header class="grid_12">
       <%= yield(:header) %>
     </header>
-    
-    <div id="main" role="main">
+    <div class="clear"></div>
+    <div id="main" role="main" class="grid_12">
       <%= yield %>
     </div>
-    
-    <footer>
+    <div class="clear"></div>
+    <footer class="prefix_4 grid_4 suffix_4">
       <%= yield(:footer) %>
     </footer>
   </div> <!--! end of #container -->
