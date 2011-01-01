@@ -46,7 +46,7 @@ GEM
       daemons
     delayed_job_mongoid (1.0.1)
       delayed_job (~> 2.1.1)
-      mongoid (~> 2.0)
+      mongoid (~> 2.0.0.beta.20)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     gemedit (0.9.0)
