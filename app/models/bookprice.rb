@@ -5,6 +5,7 @@ require 'timeout'
 class Bookprice
 
   NOT_AVAILABLE = 999_999
+  @@logger = Logger.new(STDOUT)
 
   attr_accessor :isbn
 
@@ -14,7 +15,7 @@ class Bookprice
 
   # For usage with DelayedJob : Bookprice.new(:isbn => "9789380032825").perform
   def perform
-    logger.info("Performing job for #{self.isbn}")
+    @@logger.info("Performing job for #{self.isbn}")
     prices = self.class.prices(self.isbn)
     Rails.cache.write(self.cache_key, prices)
     prices
