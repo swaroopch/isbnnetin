@@ -178,7 +178,7 @@ class Bookprice
       url = "http://www.uread.com/search-books/#{isbn}/"
       page = self.fetch_page(url)
       unless page.nil?
-        text = page.search("span.our-price").text
+        text = page.search("p.our-price").text
         { :price => find_price_at_end(text), :url => url }
       else
         { :price => NOT_AVAILABLE, :url => url }
