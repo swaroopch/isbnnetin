@@ -174,16 +174,17 @@ class Bookprice
       end
     end
 
-    def search_uread(isbn)
-      url = "http://www.uread.com/search-books/#{isbn}/"
-      page = self.fetch_page(url)
-      unless page.nil?
-        text = page.search("p.our-price").text
-        { :price => find_price_at_end(text), :url => url }
-      else
-        { :price => NOT_AVAILABLE, :url => url }
-      end
-    end
+## Disabled because when pinging from a USA VPS, it returns dollars, whereas in the browser it shows rupees.
+#    def search_uread(isbn)
+#      url = "http://www.uread.com/search-books/#{isbn}/"
+#      page = self.fetch_page(url)
+#      unless page.nil?
+#        text = page.search("p.our-price").text
+#        { :price => find_price_at_end(text), :url => url }
+#      else
+#        { :price => NOT_AVAILABLE, :url => url }
+#      end
+#    end
 
     def search_tradus(isbn)
       url = "http://www.tradus.in/search/tradus_search/#{isbn}"
