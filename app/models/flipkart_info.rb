@@ -9,9 +9,9 @@ class FlipkartInfo
 
       product_details = page.search("div.item_details span.product_details_values")
       unless product_details.blank?
-        title     = product_details[0].text.strip
-        authors   = product_details[1].text.strip
-        publisher = product_details[6].text.strip
+        title     = product_details[0].try(:text).try(:strip) or ""
+        authors   = product_details[1].try(:text).try(:strip) or ""
+        publisher = product_details[6].try(:text).try(:strip) or ""
       else
         return nil
       end
