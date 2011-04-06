@@ -55,7 +55,7 @@ class Bookprice
 
     def searches
       # e.g. ["search_a1books", "search_infibeam", "search_rediff"]
-      functions = self.methods.select { |name| name =~ /^search_(\w+)$/ }.sort
+      functions = self.methods.map(&:to_s).select { |name| name =~ /^search_(\w+)$/ }.sort
       # e.g. [[:a1books, search_a1books], [:infibeam, search_infibeam], [:rediff, search_rediff]]
       functions.collect { |fname| [ fname.split("_")[1].to_sym, self.method(fname) ] }
     end
