@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '>= 3.0.3'
-gem 'jquery-rails', '>= 0.2.6'
+gem 'rails'
+gem 'jquery-rails'
 
 # http://mongoid.org/docs/installation/
-gem 'mongoid', '>= 2.0.0.beta'
-gem 'bson_ext', '>= 1.1.5'
+gem 'mongoid'
+gem 'bson_ext'
 
 gem 'delayed_job'
 gem 'delayed_job_mongoid'
@@ -46,5 +46,9 @@ group :development, :test do
   gem 'hirb'
   gem 'awesome_print'
   gem 'gemedit'
-  gem 'ruby-debug'
+  if RUBY_VERSION =~ /1.9/
+    gem 'ruby-debug19'
+  else
+    gem 'ruby-debug'
+  end
 end

@@ -113,16 +113,16 @@ PLATFORMS
 DEPENDENCIES
   amazon-ecs
   awesome_print
-  bson_ext (>= 1.1.5)
+  bson_ext
   configatron
   dalli
   delayed_job
   delayed_job_mongoid
   gemedit
   hirb
-  jquery-rails (>= 0.2.6)
+  jquery-rails
   mechanize
-  mongoid (>= 2.0.0.beta)
-  rails (>= 3.0.3)
+  mongoid
+  rails
   ruby-debug
   wirble
