@@ -10,7 +10,6 @@ class BookController < ApplicationController
     end
 
     @prices = Bookprice.new(:isbn => @isbn)
-    #@prices = @prices.reject { |store, data| store == :uread } ## XXX HACK
 
     @bookinfo = Rails.cache.fetch("amazon_info:#{@isbn}", :expires_in => 1.day) { AmazonInfo::book_info(@isbn) }
     if @bookinfo.nil?
@@ -33,6 +32,8 @@ class BookController < ApplicationController
     end
 
     @not_available = Bookprice::NOT_AVAILABLE
+
+    @stores = @stores.reject { |store, data| store == :uread } ## XXX HACK
 
     respond_with(@stores) do |format|
       format.json do
