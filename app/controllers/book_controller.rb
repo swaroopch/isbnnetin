@@ -33,7 +33,9 @@ class BookController < ApplicationController
 
     @not_available = Bookprice::NOT_AVAILABLE
 
-    @stores = @stores.reject { |store, data| store == :uread } ## XXX HACK
+    if @stores.present?
+      @stores = @stores.reject { |store, data| store == :uread } ## XXX HACK
+    end
 
     respond_with(@stores) do |format|
       format.json do
