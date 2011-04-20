@@ -17,6 +17,7 @@ gem 'configatron', :require => 'configatron' # https://github.com/markbates/conf
 gem 'mechanize', :require => 'mechanize'
 gem 'amazon-ecs', :require => 'amazon/ecs'
 
+gem 'SystemTimer'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
