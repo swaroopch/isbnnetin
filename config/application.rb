@@ -45,8 +45,8 @@ module Isbnnetin
     config.filter_parameters += [:password]
 
     # Logging
-    config.logger = Logger.new(STDOUT)
-    config.log_level = Logger::WARN
+    config.logger = Logger.new(Rails.root.join("log", "#{Rails.env}.log"), 'weekly', 5*1024*1024)
+    config.log_level = Logger::DEBUG
 
     # Caching
     config.cache_store = :dalli_store, { :namespace => 'isbnnetin' }
