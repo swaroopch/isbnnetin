@@ -11,6 +11,21 @@ class BookController < ApplicationController
 
     @prices = Bookprice.new(:isbn => @isbn)
 
+    @stores = Rails.cache.fetch(@prices.cache_key)
+    if @stores.nil?
+      # Check if book is already queued.
+      if Delayed::Backend::Mongoid::Job.where(:handler => /#{@isbn}/).empty?
+        logger.info("Book #{@isbn} has been queued")
+        @prices.delay.perform
+      else
+        logger.info("Book #{@isbn} is already queued")
+      end
+    end
+
+    if @stores.present?
+      @stores = @stores.reject { |store, data| store == :uread } ## XXX HACK
+    end
+
     @bookinfo = Rails.cache.fetch("amazon_info:#{@isbn}", :expires_in => 1.day) { AmazonInfo::book_info(@isbn) }
     if @bookinfo.nil?
       @bookinfo = Rails.cache.fetch("flipkart_info:#{@isbn}", :expires_in => 1.day) { FlipkartInfo::book_info(@isbn) }
@@ -18,24 +33,9 @@ class BookController < ApplicationController
 
     unless @bookinfo.nil?
       @bookseer = BookseerInfo::link(@bookinfo)
-
-      @stores = Rails.cache.fetch(@prices.cache_key)
-      if @stores.nil?
-        # Check if book is already queued.
-        if Delayed::Backend::Mongoid::Job.where(:handler => /#{@isbn}/).empty?
-          logger.info("Book #{@isbn} has been queued")
-          @prices.delay.perform
-        else
-          logger.info("Book #{@isbn} is already queued")
-        end
-      end
     end
 
     @not_available = Bookprice::NOT_AVAILABLE
-
-    if @stores.present?
-      @stores = @stores.reject { |store, data| store == :uread } ## XXX HACK
-    end
 
     respond_with(@stores) do |format|
       format.json do
