@@ -196,16 +196,17 @@ class Bookprice
       end
     end
 
-    def search_jumadi(isbn)
-      url = "http://www.jumadi.in/#{isbn}"
-      page = self.fetch_page(url)
-      unless page.nil?
-        text = page.search("span#our_price_display").text
-        { :price => find_price_at_end(text), :url => url }
-      else
-        { :price => NOT_AVAILABLE, :url => url }
-      end
-    end
+    ## NOTE Disabled because it always gives a 404
+    #def search_jumadi(isbn)
+      #url = "http://www.jumadi.in/#{isbn}"
+      #page = self.fetch_page(url)
+      #unless page.nil?
+        #text = page.search("span#our_price_display").text
+        #{ :price => find_price_at_end(text), :url => url }
+      #else
+        #{ :price => NOT_AVAILABLE, :url => url }
+      #end
+    #end
 
     def search_coinjoos(isbn)
       url = "http://www.coinjoos.com/product/books/#{isbn}/1/"
