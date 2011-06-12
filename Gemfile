@@ -17,7 +17,7 @@ gem 'configatron', :require => 'configatron' # https://github.com/markbates/conf
 gem 'mechanize', :require => 'mechanize'
 gem 'amazon-ecs', :require => 'amazon/ecs'
 
-gem 'SystemTimer'
+#gem 'SystemTimer'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -43,13 +43,4 @@ gem 'SystemTimer'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem 'wirble'
-  gem 'hirb'
-  gem 'awesome_print'
-  gem 'gemedit'
-  if RUBY_VERSION =~ /1.9/
-    gem 'ruby-debug19'
-  else
-    gem 'ruby-debug'
-  end
 end
