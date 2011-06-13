@@ -1,7 +1,8 @@
 source 'http://rubygems.org'
 
 gem 'rails'
-gem 'jquery-rails'
+# https://github.com/rails/jquery-ujs
+gem 'jquery-rails', '>= 1.0.3'
 
 # http://mongoid.org/docs/installation/
 gem 'mongoid'
