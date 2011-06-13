@@ -28,28 +28,32 @@ class AmazonInfo
       end
 
       result.items.each do |item|
-        authors = item.get_array('author')
-        title = item.get('title')
-        publisher = item.get('publisher')
-        detailpageurl = item.get('detailpageurl')
-        image = item.get('largeimage/url')
-        reviews = item/'editorialreview'
+        item_attributes = item.get_element('ItemAttributes')
+        authors = item_attributes.get_array('Author')
+        title = item_attributes.get('Title')
+        publisher = item_attributes.get('Publisher')
+        detailpageurl = item.get('DetailPageURL')
+        image = item_attributes.get('LargeImage/URL')
+        reviews = item_attributes/'EditorialReview'
         unless reviews.nil?
           reviews.each do |review|
-            source = Amazon::Element.get_unescaped(review, 'source')
-            content = Amazon::Element.get_unescaped(review, 'content')
+            source = Amazon::Element.get_unescaped(review, 'Source')
+            content = Amazon::Element.get_unescaped(review, 'Content')
             break
           end
         end
         break
       end
 
-      result = Amazon::Ecs.item_lookup(isbn, { :response_group => 'Reviews' })
-      result.items.each do |item|
-        rating = item.get('averagerating')
-        rating_count = item.get('totalreviews')
-        break
-      end
+      rating = nil
+      rating_count = nil
+      # TODO FIXME Getting "invalid value for ItemId" error
+      #result = Amazon::Ecs.item_lookup(isbn, { :response_group => 'Reviews' })
+      #unless result.has_error?
+        #item = result.items.first
+        #rating = item.get('AverageRating')
+        #rating_count = item.get('TotalReviews')
+      #end
 
       {
         :info_source => "amazon",

@@ -15,7 +15,7 @@ gem 'dalli'
 gem 'configatron', :require => 'configatron' # https://github.com/markbates/configatron/
 
 gem 'mechanize', :require => 'mechanize'
-gem 'amazon-ecs', :require => 'amazon/ecs'
+gem "amazon-ecs", "~> 2.0.0", :require => 'amazon/ecs'
 
 #gem 'SystemTimer'
 
