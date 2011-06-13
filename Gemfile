@@ -18,6 +18,8 @@ gem 'configatron', :require => 'configatron' # https://github.com/markbates/conf
 gem 'mechanize', :require => 'mechanize'
 gem "amazon-ecs", "~> 2.0.0", :require => 'amazon/ecs'
 
+gem "foreman", "~> 0.18.0"
+
 #gem 'SystemTimer'
 
 # Bundle edge Rails instead:
