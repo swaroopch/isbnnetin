@@ -37,7 +37,7 @@ class FlipkartInfo
         image = image_tag.attr('src').text.encode('UTF-8')
       end
 
-      source = (page.search("h3.item_desc_title").try(:text) || '').strip.encode('UTF-8')
+      source = (page.search("h3.item_desc_title").try(:children).try(:first).try(:text) || '').strip.encode('UTF-8')
       content = (page.search("div.item_desc_text.description").try(:text) || '').strip.encode('UTF-8')
 
       {
