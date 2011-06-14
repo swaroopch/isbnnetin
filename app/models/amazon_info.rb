@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+# https://github.com/jugend/amazon-ecs
+# http://docs.amazonwebservices.com/AWSECommerceService/2010-11-01/DG/
+
 raise "AWS_ACCESS_KEY not specified" if ENV['AWS_ACCESS_KEY'].nil?
 raise "AWS_SECRET_KEY not specified" if ENV['AWS_SECRET_KEY'].nil?
 
