@@ -17,6 +17,10 @@ h2. MongoDB
 Add to @/etc/apt/sources.list@: @deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen@
 @sudo apt-get install mongodb-10gen@
 
+h2. Memcache
+
+@sudo apt-get install memcached@
+
 h2. Rails
 
 @cd isbn.net.in@
