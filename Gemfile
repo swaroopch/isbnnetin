@@ -20,6 +20,8 @@ gem "amazon-ecs", "~> 2.0.0", :require => 'amazon/ecs'
 
 gem "foreman", "~> 0.18.0"
 
+gem "newrelic_rpm"
+
 #gem 'SystemTimer'
 
 # Bundle edge Rails instead:
@@ -46,5 +48,7 @@ gem "foreman", "~> 0.18.0"
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem 'irbtools'
+  gem 'hirb'
+  gem 'awesome_print'
+  gem 'wirble'
 end
