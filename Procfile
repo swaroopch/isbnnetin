@@ -1,1 +1,1 @@
-job: bundle exec rake jobs:work
+job: bundle exec rake RAILS_ENV=production jobs:work
