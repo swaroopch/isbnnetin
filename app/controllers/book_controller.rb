@@ -22,10 +22,6 @@ class BookController < ApplicationController
       end
     end
 
-    if @stores.present?
-      @stores = @stores.reject { |store, data| store == :uread } ## XXX HACK
-    end
-
     @bookinfo = Rails.cache.fetch("amazon_info:#{@isbn}", :expires_in => 1.day) { AmazonInfo::book_info(@isbn) }
     if @bookinfo.nil?
       @bookinfo = Rails.cache.fetch("flipkart_info:#{@isbn}", :expires_in => 1.day) { FlipkartInfo::book_info(@isbn) }

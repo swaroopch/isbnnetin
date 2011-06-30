@@ -175,7 +175,8 @@ class Bookprice
     end
 
    def search_uread(isbn)
-     url = "http://www.uread.com/search-books/#{isbn}/"
+     #url = "http://www.uread.com/search-books/#{isbn}/"
+     url = "http://www.uread.com/book/isbnnetin/#{isbn}/"
      page = self.fetch_page(url)
      unless page.nil?
        text = page.search("p.our-price").text
