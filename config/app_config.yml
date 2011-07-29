@@ -1,9 +1,11 @@
 
 common:
   store_timeout: 5 # seconds
+  google_analytics_id: 'UA-12345678-9' # NOTE Dummy ID
 
 development:
 
 test:
 
 production:
+  google_analytics_id: 'UA-20478102-1' # NOTE You'll have to change this for your own domain
