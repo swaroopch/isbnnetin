@@ -28,7 +28,19 @@ h2. Rails
 
 h2. delayed_job
 
+For development:
+
+@foreman start@
+
+For Ubuntu Linux / production:
+
+Edit @CODEDIR@ path in @upstart/isbn.net.in-job-1.conf@
+@sudo cp -v upstart/* /etc/init/@
+@sudo start isbn.net.in@
+
+<!--
 @mkdir -p tmp@
 @foreman -u <your username> export upstart tmp@
 @sudo cp -v tmp/isbn.net.in*.conf /etc/init/@
 @sudo start isbn.net.in@
+-->
