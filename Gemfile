@@ -22,7 +22,9 @@ gem "foreman", "~> 0.18.0"
 
 gem "newrelic_rpm"
 
-#gem 'SystemTimer'
+if RUBY_VERSION =~ /^1.8/
+  gem 'SystemTimer'
+end
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
