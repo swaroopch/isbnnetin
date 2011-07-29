@@ -190,7 +190,7 @@ class Bookprice
       url = "http://www.tradus.in/search/tradus_search/#{isbn}"
       page = self.fetch_page(url)
       unless page.nil?
-        text = page.search("div.search_price_col label").text
+        text = page.search("div.productPrice").try(:first).try(:text) or ""
         { :price => find_price_at_end(text), :url => url }
       else
         { :price => NOT_AVAILABLE, :url => url }
