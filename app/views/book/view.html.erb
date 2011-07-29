@@ -80,6 +80,14 @@
   <div class="goodreads">
     <script type="text/javascript" charset="utf-8" src="http://www.goodreads.com/api/reviews_widget?did=DEVELOPER_ID&isbn=<%= @isbn %>&min_length=100&num_reviews=10"></script>
   </div>
+    <% content_for :js do %>
+      // Ugly hack to prevent Goodreads showing 'Huckleberry Finn' reviews when it doesn't know the ISBN...
+      $( function() {
+      if ( $(".goodreads div.gr_reviews_header a").attr('href').match(/2956\./) ) {
+        $(".goodreads").remove();
+      }
+      } );
+    <% end %>
 
   <% unless @bookseer.nil? %>
     <h2>What to read next?</h2>
