@@ -112,7 +112,9 @@ class Bookprice
       url = "http://books.rediff.com/book/ISBN:#{isbn}"
       page = self.fetch_page(url)
       unless page.nil?
-        text = page.search("font#book-pric b").try(:first).try(:text) or ""
+        text = page.search("font#book-pric b").first
+        text = text.text unless text.blank?
+        text = "" if text.blank?
         { :price => find_price_at_end(text), :url => url }
       else
         { :price => NOT_AVAILABLE, :url => url }
@@ -190,7 +192,9 @@ class Bookprice
       url = "http://www.tradus.in/search/tradus_search/#{isbn}"
       page = self.fetch_page(url)
       unless page.nil?
-        text = page.search("div.productPrice").try(:first).try(:text) or ""
+        text = page.search("div.productPrice").first
+        text = text.text unless text.blank?
+        text = "" if text.blank?
         { :price => find_price_at_end(text), :url => url }
       else
         { :price => NOT_AVAILABLE, :url => url }
