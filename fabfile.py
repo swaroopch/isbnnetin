@@ -31,9 +31,15 @@ def push():
     _transfer_files(local_dir, env.host + ':' + remote_dir, env.port) # transfer the code
 
     with cd(remote_dir):
+        #run("env RAILS_ENV=production rake cache:clear")  # clear memcache
         run("rm -vf public/index.html public/about.html") # remove page caches on disk
-        #run("env RAILS_ENV=production rake cache:clear") # clear memcache
-        run("touch tmp/restart.txt")                     # restart passenger
-        sudo("restart isbn.net.in")                      # delayed_job worker
+        run("touch tmp/restart.txt")                      # restart passenger
+        try:
+            sudo("stop isbn.net.in")                      # stop workers
+        except:
+            pass
+        sudo("cp -v upstart/* /etc/init/")                # copy latest upstart files
+        run("rm -f tmp/pids/delayed_job*")                # remove pids
+        sudo("start isbn.net.in")                         # start workers
 
     puts(magenta('Success! The {0} server has been updated.'.format(env.host_string)))
