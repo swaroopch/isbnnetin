@@ -256,6 +256,21 @@ class Bookprice
         { :price => NOT_AVAILABLE, :url => url }
       end
     end
+
+    def search_kindle(isbn)
+      url = "http://www.amazon.com/s/ref=nb_sb_noss?url=node%3D1286228011&field-keywords=#{isbn}&x=0&y=0"
+      page = self.fetch_page(url)
+      unless page.nil?
+        text = page.search("span.sr_price")
+        if text.present?
+          text = text.text
+        end
+        text = "" if text.blank?
+        { :price => find_price_at_end(text), :url => url }
+      else
+        { :price => NOT_AVAILABLE, :url => url }
+      end
+    end
   end
 
 end

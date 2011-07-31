@@ -52,7 +52,11 @@
             </td>
             <td>
               <% unless data[:price] == @not_available %>
-                <span style="font-family:rupee">R</span> <%= data[:price] %>
+                <% if store == :kindle %>
+                  $ <%= data[:price] %>
+                <% else %>
+                  <span style="font-family:rupee">R</span> <%= data[:price] %>
+                <% end %>
               <% else %>
                 not available
               <% end %>
