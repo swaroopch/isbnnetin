@@ -1,11 +1,18 @@
 class BookController < ApplicationController
+  include BookHelper
+
   respond_to :html
   respond_to :json, :only => :view
 
   def view
     @isbn = canonicalize_isbn(params[:isbn])
-    if @isbn.nil? || !is_isbn(@isbn)
+    unless @isbn.present? && (is_isbn10(@isbn) || is_isbn13(@isbn))
       render :text => 'Not Found', :status => 404
+      return
+    end
+
+    if is_isbn10(@isbn)
+      redirect_to :action => "view", :isbn => isbn_10_to_13(@isbn)
       return
     end
 
@@ -49,8 +56,12 @@ class BookController < ApplicationController
     end
   end
 
-  def is_isbn(text)
-    /^[0-9]{9}[0-9xx]$/.match(text) or /^[0-9]{13}$/.match(text)
+  def is_isbn10(text)
+    /^[0-9]{9}[0-9xx]$/.match(text)
+  end
+
+  def is_isbn13(text)
+    /^[0-9]{13}$/.match(text)
   end
 
 end
