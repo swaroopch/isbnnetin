@@ -49,6 +49,6 @@ module Isbnnetin
     config.log_level = Logger::DEBUG
 
     # Caching
-    config.cache_store = :dalli_store, { :namespace => 'isbnnetin' }
+    config.cache_store = :dalli_store, '127.0.0.1', { :namespace => 'isbnnetin' }
   end
 end
