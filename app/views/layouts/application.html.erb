@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -7,15 +6,22 @@
 
   <title>isbn.net.in: <%= yield(:title) %></title>
 
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="<%= yield(:description) %>">
+  <meta name="author" content="<%= yield(:author) %>">
 
-  <%= stylesheet_link_tag :all %>
+  <!-- CSS -->
+  <%= stylesheet_link_tag "main", "960", "rupee", "site", :cache => true %>
   <style>
     <%= yield(:css) %>
   </style>
+
+  <!-- JavaScript -->
+  <!--[if IE]><![endif]-->
+  <!--[if lt IE 9]>
+  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <%= javascript_include_tag "respond.min.js", :cache => true %>
   <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
 </head>
 
 <body>
@@ -29,20 +35,24 @@
       <%= yield %>
     </div>
     <div class="clear"></div>
-    <footer class="prefix_4 grid_4 suffix_4">
+    <footer class="prefix_3 grid_6 suffix_3">
       <p>
-        Copyright &copy; 2010-<%= Time.zone.now.strftime("%Y") %> <a href="http://www.swaroopch.com">Swaroop C H</a>
+      <a href="/">Home</a>
+      &nbsp;
+      |
+      &nbsp;
+      Copyright &copy; 2010-<%= Time.zone.now.strftime("%Y") %> <a href="http://www.swaroopch.com">Swaroop C H</a>
       </p>
       <%= yield(:footer) %>
     </footer>
   </div> <!--! end of #container -->
 
-
-  <!-- Javascript at the bottom for fast page loading -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+  <script>
+  <%= yield(:js) %>
+  </script>
 
   <!-- Google Analytics -->
-  <script type="text/javascript">
+  <script>
 
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', '<%= configatron.google_analytics_id %>']);
@@ -56,8 +66,5 @@
 
   </script>
 
-  <script>
-  <%= yield(:js) %>
-  </script>
 </body>
 </html>

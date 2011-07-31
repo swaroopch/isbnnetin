@@ -90,8 +90,12 @@
     <% end %>
 
   <% unless @bookseer.nil? %>
+    <div class="bookseer">
     <h2>What to read next?</h2>
-    <a rel="nofollow" href="<%= @bookseer %>">Consult the Bookseer</a>
+    <p>
+      <a rel="nofollow" href="<%= @bookseer %>">Consult the Bookseer</a>
+    </p>
+    </div>
   <% end %>
 
 <% else %><%# @bookinfo is nil %>
