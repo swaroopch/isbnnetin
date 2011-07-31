@@ -21,7 +21,7 @@ def _transfer_files(src, dst, port=22):
         src = src + '/'
     if dst.endswith('/'):
         dst = dst[:-1]
-    local('rsync -avh --delete-before --copy-unsafe-links --exclude "log/*" -e "ssh -p {0}" {1} {2}'.format(port, src, dst), capture=False)
+    local('rsync -avh --delete-before --copy-unsafe-links --exclude "log/*" --exclude ".*.sw*" --exclude "tmp/*" -e "ssh -p {0}" {1} {2}'.format(port, src, dst), capture=False)
 
 @hosts('isbn.net.in:30247')
 def push():
