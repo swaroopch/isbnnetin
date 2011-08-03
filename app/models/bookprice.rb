@@ -271,6 +271,18 @@ class Bookprice
         { :price => NOT_AVAILABLE, :url => url }
       end
     end
+
+    def search_cerramatter(isbn)
+      url = "http://www.cerramatter.com/Search.html?keyword1=#{isbn}"
+      page = self.fetch_page(url)
+      unless page.nil?
+        text = page.search(".productPrice").text
+        { :price => find_price_at_end(text), :url => url }
+      else
+        { :price => NOT_AVAILABLE, :url => url }
+      end
+    end
+
   end
 
 end
