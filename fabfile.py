@@ -7,17 +7,17 @@ Requires Fabric from www.fabfile.org
 '''
 
 import os
-from getpass import getuser
+import getpass
 
-from fabric.api import env, hosts, local, run, sudo
+from fabric.api import env, local, run, sudo
 from fabric.context_managers import cd
 from fabric.utils import puts
-from fabric.colors import magenta
+from fabric import colors
 
 
 env.hosts = ('isbn.net.in:30247',)
 LOCAL_DIR = os.getcwd()
-REMOTE_DIR = '/home/' + getuser() + '/web/isbn.net.in/private/isbn.net.in'
+REMOTE_DIR = '/home/' + getpass.getuser() + '/web/isbn.net.in/private/isbn.net.in'
 
 
 def _transfer_files(src, dst, port=22):
@@ -30,8 +30,8 @@ def _transfer_files(src, dst, port=22):
     local('rsync -avh --delete-before --copy-unsafe-links --exclude "log/*" --exclude ".*.sw*" --exclude "tmp/*" -e "ssh -p {0}" {1} {2}'.format(port, src, dst), capture=False)
 
 
-@hosts('isbn.net.in:30247')
 def push():
+    '''Push code to server'''
     global LOCAL_DIR, REMOTE_DIR
 
     _transfer_files(LOCAL_DIR, env.host + ':' + REMOTE_DIR, env.port) # transfer the code
@@ -48,11 +48,11 @@ def push():
         run("rm -f tmp/pids/delayed_job*")                # remove pids
         sudo("start isbn.net.in")                         # start workers
 
-    puts(magenta('Success! The {0} server has been updated.'.format(env.host_string)))
+    puts(colors.magenta('Success! The {0} server has been updated.'.format(env.host_string)))
 
 
 def clear_cache():
-    '''Clear Memcache'''
+    '''Clear cache on server'''
     global REMOTE_DIR
 
     with cd(REMOTE_DIR):
