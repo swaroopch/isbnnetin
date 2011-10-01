@@ -25,7 +25,7 @@ jQuery.runisbn = function() {
       isbn = $.trim( $("b:contains('EAN:')").next().text() );
     }
   } else if ((/flipkart.com/i).test(window.location.href)) {
-    isbn = $.trim( $("span:contains('ISBN:')").next().find("b h2").text() );
+    isbn = $.trim( $("td:contains('ISBN:')").next().find("b h2").text() );
   } else if ((/a1books.co.in\/itemdetail/i).test(window.location.href)) {
     isbn = $.trim( $("span:contains('ISBN:')").parent().next().text() );
   } else if ((/books.rediff.com\/book\//i).test(window.location.href)) {
