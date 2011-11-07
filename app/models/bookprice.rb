@@ -32,6 +32,7 @@ class Bookprice
   class << self
 
     def find_price_at_end(text)
+      return NOT_AVAILABLE if text.blank?
       text.strip!
       price = /[,\d]+(\.\d+)?$/.match(text).to_s.gsub(",","").to_f
       price > 0 ? price : NOT_AVAILABLE
@@ -122,10 +123,14 @@ class Bookprice
     end
 
     def search_indiaplaza(isbn)
-      url = "http://www.indiaplaza.in/search.aspx?catname=Books&srchkey=sku&srchVal=#{isbn}"
+      url = "http://www.indiaplaza.com/books/#{isbn}.htm"
       page = self.fetch_page(url)
       unless page.nil?
-        text = page.search("div.tier1box2/ul/li:first-child").text
+        begin
+          text = page.search("div#content li:first-child")[0].children[1].text
+        rescue
+          text = nil
+        end
         { :price => find_price_at_end(text), :url => url }
       else
         { :price => NOT_AVAILABLE, :url => url }
