@@ -123,7 +123,7 @@ class Bookprice
     end
 
     def search_indiaplaza(isbn)
-      url = "http://www.indiaplaza.com/books/#{isbn}.htm"
+      url = "http://www.indiaplaza.com/books/#{isbn}.htm?affId=110550"
       page = self.fetch_page(url)
       unless page.nil?
         begin
