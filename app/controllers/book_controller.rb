@@ -11,9 +11,11 @@ class BookController < ApplicationController
       return
     end
 
-    if is_isbn10(@isbn)
-      redirect_to :action => "view", :isbn => isbn_10_to_13(@isbn)
-      return
+    unless request.format == 'json'
+      if is_isbn10(@isbn)
+        redirect_to :action => "view", :isbn => isbn_10_to_13(@isbn)
+        return
+      end
     end
 
     @prices = Bookprice.new(:isbn => @isbn)
