@@ -44,7 +44,11 @@ class BookController < ApplicationController
 
     respond_with(@stores) do |format|
       format.json do
-        render :json => @stores
+        if @stores.blank?
+          render :json => { :status => 'progress', :details => 'query again in a minute and hopefully will have results for you by then.' }
+        else
+          render :json => @stores
+        end
       end
     end
   end
