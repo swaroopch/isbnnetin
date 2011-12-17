@@ -288,6 +288,17 @@ class Bookprice
       end
     end
 
+    def search_rightbooks(isbn)
+      url = "http://www.rightbooks.in/Product_search.asp?cid=1&fc=5&fsr=#{isbn}&pt=2"
+      page = self.fetch_page(url)
+      unless page.nil?
+        text = page.search("span.footer_author1").text
+        { :price => find_price_at_end(text), :url => url }
+      else
+        { :price => NOT_AVAILABLE, :url => url }
+      end
+    end
+
   end
 
 end
