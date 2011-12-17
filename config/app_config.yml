@@ -8,4 +8,5 @@ development:
 test:
 
 production:
+  store_timeout: 10 # seconds
   google_analytics_id: 'UA-20478102-1' # NOTE You'll have to change this for your own domain
