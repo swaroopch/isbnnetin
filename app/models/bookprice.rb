@@ -277,16 +277,17 @@ class Bookprice
       end
     end
 
-    def search_cerramatter(isbn)
-      url = "http://www.cerramatter.com/Search.html?keyword1=#{isbn}"
-      page = self.fetch_page(url)
-      unless page.nil?
-        text = page.search(".productPrice").text
-        { :price => find_price_at_end(text), :url => url }
-      else
-        { :price => NOT_AVAILABLE, :url => url }
-      end
-    end
+    ## NOTE Disabled because it always gives a 503
+    #def search_cerramatter(isbn)
+      #url = "http://www.cerramatter.com/Search.html?keyword1=#{isbn}"
+      #page = self.fetch_page(url)
+      #unless page.nil?
+        #text = page.search(".productPrice").text
+        #{ :price => find_price_at_end(text), :url => url }
+      #else
+        #{ :price => NOT_AVAILABLE, :url => url }
+      #end
+    #end
 
     def search_rightbooks(isbn)
       url = "http://www.rightbooks.in/Product_search.asp?cid=1&fc=5&fsr=#{isbn}&pt=2"
