@@ -123,11 +123,11 @@ class Bookprice
     end
 
     def search_indiaplaza(isbn)
-      url = "http://www.indiaplaza.com/search.aspx?storename=Books&srchkey=isbn&srchVal=#{isbn}?affid=110550"
+      url = "http://www.indiaplaza.com/searchproducts.aspx?sn=books&q=#{isbn}&affid=110550"
       page = self.fetch_page(url)
       unless page.nil?
         begin
-          text = page.search(".tier1box2 ul li:first-child span").text
+          text = page.search("div.ourPrice").text
         rescue
           text = nil
         end
