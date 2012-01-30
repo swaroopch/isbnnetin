@@ -193,18 +193,19 @@ class Bookprice
      end
    end
 
-    def search_tradus(isbn)
-      url = "http://www.tradus.in/search/tradus_search/#{isbn}"
-      page = self.fetch_page(url)
-      unless page.nil?
-        text = page.search("div.productPrice").first
-        text = text.text unless text.blank?
-        text = "" if text.blank?
-        { :price => find_price_at_end(text), :url => url }
-      else
-        { :price => NOT_AVAILABLE, :url => url }
-      end
-    end
+    ## NOTE Disabled because it shows junk results for ISBN search
+    #def search_tradus(isbn)
+      #url = "http://www.tradus.in/search/tradus_search/#{isbn}"
+      #page = self.fetch_page(url)
+      #unless page.nil?
+        #text = page.search("div.productPrice").first
+        #text = text.text unless text.blank?
+        #text = "" if text.blank?
+        #{ :price => find_price_at_end(text), :url => url }
+      #else
+        #{ :price => NOT_AVAILABLE, :url => url }
+      #end
+    #end
 
     ## NOTE Disabled because it always gives a 404
     #def search_jumadi(isbn)
